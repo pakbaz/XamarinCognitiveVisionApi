@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CognitiveVisionApi"
+             x:Class="CognitiveVisionApi.MainPage">
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="20">
+            <Button x:Name="TakePictureButton" Clicked="TakePictureButton_Clicked"
+      Text="Take from camera"/>
+            <Button x:Name="UploadPictureButton" Clicked="UploadPictureButton_Clicked"
+      Text="Pick a photo"/>
+            <ActivityIndicator x:Name="Indicator1" IsVisible="False" IsRunning="False" />
+            <Image x:Name="Image1" HeightRequest="240" />
+            <ScrollView Padding="10">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Adult content: "/>
+                        <Label Text="{Binding Adult.IsAdultContent}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Racy content: "/>
+                        <Label Text="{Binding Adult.IsRacyContent}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Celebrity: "/>
+                        <Label x:Name="CelebrityName" Text="None"/>
+                    </StackLayout>
+                    
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Description: "/>
+                        <Label Text="{Binding Description.Captions[0].Text}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Accent color: "/>
+                        <Label Text="{Binding Color.AccentColor}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" x:Name="pnlOcr" IsVisible="False">
+                        <Label>Text Detected, Information:</Label>
+                        <Label x:Name="lblLanguage"></Label>
+                        <Label x:Name="lblAngel"></Label>
+                        <ScrollView>
+                            <StackLayout x:Name="DetectedText">
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" IsVisible="False" x:Name="tags">
+                        <Label Text="Tags:"/>
+                        <ListView ItemsSource="{Binding Tags}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Label Text="{Binding Name}"/>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                   
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
